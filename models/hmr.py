@@ -133,6 +133,7 @@ class HMR(nn.Module):
 
         xf = self.avgpool(x4)
         xf = xf.view(xf.size(0), -1)
+        # print(xf.shape)
 
         pred_pose = init_pose
         pred_shape = init_shape
@@ -143,13 +144,19 @@ class HMR(nn.Module):
             xc = self.drop1(xc)
             xc = self.fc2(xc)
             xc = self.drop2(xc)
+            # print(xc.shape)
             pred_pose = self.decpose(xc) + pred_pose
             pred_shape = self.decshape(xc) + pred_shape
             pred_cam = self.deccam(xc) + pred_cam
         
-        pred_rotmat = rot6d_to_rotmat(pred_pose).view(batch_size, 24, 3, 3)
+        xc = torch.cat([xf, pred_pose, pred_shape, pred_cam], 1)
+        # print('rotmat_shape', pred_pose.shape)
+        # print('shape_shape', pred_shape.shape)
+        # print('cam_shape', pred_cam.shape)
+        # pred_rotmat = rot6d_to_rotmat(pred_pose).view(batch_size, 24, 3, 3)
 
-        return pred_rotmat, pred_shape, pred_cam
+        # return pred_rotmat, pred_shape, pred_cam
+        return xc
 
 def hmr(smpl_mean_params, pretrained=True, **kwargs):
     """ Constructs an HMR model with ResNet50 backbone.

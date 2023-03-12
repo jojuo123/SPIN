@@ -20,6 +20,7 @@ class SMPL(_SMPL):
 
     def forward(self, *args, **kwargs):
         kwargs['get_skin'] = True
+        # print(kwargs['betas'].shape, kwargs['body_pose'].shape)
         smpl_output = super(SMPL, self).forward(*args, **kwargs)
         extra_joints = vertices2joints(self.J_regressor_extra, smpl_output.vertices)
         joints = torch.cat([smpl_output.joints, extra_joints], dim=1)
