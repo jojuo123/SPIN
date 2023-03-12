@@ -1,4 +1,15 @@
 # SPIN - SMPL oPtimization IN the loop
+
+Note: 
+- thêm file model/tuner.py với phần tính label attention cho chiều cao
+để chạy được model, cần comment bớt các dòng trong file preprocess_datatasets.py (comment những dataset không có)
+- cần copy thư mục mesh-mesh-interaction từ SHAPY vào thư mục chính của SPIN (e.g. SPIN/mesh-mesh-interaction) (link SHAPY: https://github.com/muelea/shapy)
+- làm theo chỉ dẫn ở https://github.com/muelea/shapy/blob/master/documentation/INSTALL.md phần cài mesh-mesh-interaction (cd ../mesh-mesh-intersection
+export CUDA_SAMPLES_INC=$(pwd)/include
+pip install -r requirements.txt
+python setup.py install)
+- code SPIN tuner chạy được nhưng thiếu dataset 
+
 Code repository for the paper:  
 **Learning to Reconstruct 3D Human Pose and Shape via Model-fitting in the Loop**  
 [Nikos Kolotouros](https://www.seas.upenn.edu/~nkolot/)\*, [Georgios Pavlakos](https://www.seas.upenn.edu/~pavlakos/)\*, [Michael J. Black](https://ps.is.mpg.de/~black), [Kostas Daniilidis](http://www.cis.upenn.edu/~kostas/)  
